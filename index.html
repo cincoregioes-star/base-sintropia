@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0b0f0d" />
+  <title>BASE Sintropia</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <div class="brand">
+        <div class="brand-mark" aria-label="BASE Sintropia"><i class="bi bi-flower1"></i></div>
+        <div>
+          <h1><span class="brand-base">BASE</span> <span class="brand-sintropia">Sintropia</span></h1>
+          <small>Fortalecimento de Vínculos</small>
+        </div>
+      </div>
+
+      <nav class="nav">
+        <button class="nav-item active" data-view="dashboard"><i class="bi bi-grid-1x2-fill"></i><span>Início</span></button>
+        <button class="nav-item" data-view="rotina"><i class="bi bi-pin-angle-fill"></i><span>Minha Rotina</span></button>
+        <button class="nav-item" data-view="usuarios"><i class="bi bi-people-fill"></i><span>Usuários</span></button>
+        <button class="nav-item" data-view="grupos"><i class="bi bi-diagram-3-fill"></i><span>Grupos</span></button>
+        <button class="nav-item" data-view="encontros"><i class="bi bi-chat-heart-fill"></i><span>Encontros</span></button>
+        <button class="nav-item" data-view="frequencia"><i class="bi bi-check2-square"></i><span>Frequência</span></button>
+        <button class="nav-item" data-view="vinculos"><i class="bi bi-stars"></i><span>Vínculos</span></button>
+        <button class="nav-item" data-view="oficinas"><i class="bi bi-tools"></i><span>Oficinas</span></button>
+        <button class="nav-item" data-view="agenda"><i class="bi bi-calendar3"></i><span>Agenda</span></button>
+        <button class="nav-item" data-view="notas"><i class="bi bi-journal-text"></i><span>Notas</span></button>
+        <button class="nav-item" data-view="tarefas"><i class="bi bi-list-check"></i><span>Tarefas</span></button>
+        <button class="nav-item" data-view="relatorios"><i class="bi bi-bar-chart-line-fill"></i><span>Relatórios</span></button>
+        <button class="nav-item" data-view="biblioteca"><i class="bi bi-collection-fill"></i><span>Biblioteca</span></button>
+        <a class="nav-item portfolio-link" href="portfolio.html"><i class="bi bi-person-badge-fill"></i><span>Autor & Portfólio</span></a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="status-dot"></div>
+        <span>Dados salvos neste navegador</span>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu"><i class="bi bi-list"></i></button>
+
+        <div class="welcome">
+          <strong id="welcomeText">Bom dia, Orientador</strong>
+          <span id="dateText"></span>
+        </div>
+
+        <div class="top-actions">
+          <div class="clock" id="clock">00:00:00</div>
+          <button class="icon-btn" id="globalSearchBtn" title="Busca global"><i class="bi bi-search"></i></button>
+          <button class="icon-btn" id="notificationBtn" title="Notificações"><i class="bi bi-bell-fill"></i></button>
+          <div class="avatar">OS</div>
+        </div>
+      </header>
+
+      <section class="content">
+        <!-- DASHBOARD -->
+        <div class="view active" id="view-dashboard">
+          <div class="page-heading">
+            <div>
+              <h2>Painel principal</h2>
+              <p>Visão rápida da rotina e das atividades do SCFV.</p>
+            </div>
+            <button class="primary-btn" onclick="openQuickAction()"><i class="bi bi-plus-circle-fill"></i> Ação rápida</button>
+          </div>
+
+          <div class="cards-grid dashboard-cards">
+            <article class="stat-card green">
+              <span><i class="bi bi-people-fill"></i> Usuários ativos</span>
+              <strong id="statUsers">0</strong>
+              <small>participantes cadastrados</small>
+            </article>
+            <article class="stat-card cyan">
+              <span><i class="bi bi-diagram-3-fill"></i> Grupos ativos</span>
+              <strong id="statGroups">0</strong>
+              <small>grupos em acompanhamento</small>
+            </article>
+            <article class="stat-card orange">
+              <span><i class="bi bi-calendar-event-fill"></i> Compromissos hoje</span>
+              <strong id="statAgenda">0</strong>
+              <small>agenda do dia</small>
+            </article>
+            <article class="stat-card purple">
+              <span><i class="bi bi-list-check"></i> Tarefas pendentes</span>
+              <strong id="statTasks">0</strong>
+              <small>ações para concluir</small>
+            </article>
+            <article class="stat-card pink">
+              <span><i class="bi bi-journal-text"></i> Notas recentes</span>
+              <strong id="statNotes">0</strong>
+              <small>registros de trabalho</small>
+            </article>
+            <article class="stat-card blue">
+              <span><i class="bi bi-tools"></i> Oficinas disponíveis</span>
+              <strong id="statWorkshops">8</strong>
+              <small>banco inicial</small>
+            </article>
+          </div>
+
+          <div class="two-col">
+            <article class="panel">
+              <div class="panel-head">
+                <div>
+                  <h3><i class="bi bi-sun-fill"></i> Meu Dia</h3>
+                  <p>Próximos compromissos</p>
+                </div>
+                <button class="ghost-btn" data-view-link="agenda">Abrir agenda</button>
+              </div>
+              <div id="todayAgenda" class="timeline empty-state">Nenhum compromisso agendado para hoje.</div>
+            </article>
+
+            <article class="panel">
+              <div class="panel-head">
+                <div>
+                  <h3><i class="bi bi-exclamation-circle-fill"></i> Pendências</h3>
+                  <p>Tarefas em aberto</p>
+                </div>
+                <button class="ghost-btn" data-view-link="tarefas">Ver tarefas</button>
+              </div>
+              <div id="dashboardTasks" class="list empty-state">Nenhuma tarefa pendente.</div>
+            </article>
+          </div>
+
+          <div class="two-col">
+            <article class="panel">
+              <div class="panel-head">
+                <div>
+                  <h3><i class="bi bi-lightning-charge-fill"></i> Atalhos</h3>
+                  <p>Ações mais usadas</p>
+                </div>
+              </div>
+              <div class="quick-grid">
+                <button onclick="showView('usuarios'); setTimeout(()=>document.getElementById('userName').focus(),100)"><i class="bi bi-person-plus-fill"></i> Novo usuário</button>
+                <button onclick="showView('agenda'); setTimeout(()=>document.getElementById('agendaTitle').focus(),100)"><i class="bi bi-calendar2-plus-fill"></i> Agendar</button>
+                <button onclick="showView('notas'); setTimeout(()=>document.getElementById('noteText').focus(),100)"><i class="bi bi-pencil-square"></i> Nova nota</button>
+                <button onclick="showView('tarefas'); setTimeout(()=>document.getElementById('taskTitle').focus(),100)"><i class="bi bi-list-task"></i> Nova tarefa</button>
+                <button onclick="showView('oficinas')"><i class="bi bi-tools"></i> Abrir oficinas</button>
+                <button onclick="showView('vinculos')"><i class="bi bi-stars"></i> Registrar vínculo</button>
+              </div>
+            </article>
+
+            <article class="panel">
+              <div class="panel-head">
+                <div>
+                  <h3><i class="bi bi-stars"></i> Dimensões BASE Sintropia</h3>
+                  <p>Referência para observação socioeducativa</p>
+                </div>
+              </div>
+              <div class="rainbow-bars">
+                <div><span>Participação</span><i class="bar b1"></i></div>
+                <div><span>Convivência</span><i class="bar b2"></i></div>
+                <div><span>Pertencimento</span><i class="bar b3"></i></div>
+                <div><span>Autonomia</span><i class="bar b4"></i></div>
+                <div><span>Protagonismo</span><i class="bar b5"></i></div>
+                <div><span>Território e redes</span><i class="bar b6"></i></div>
+              </div>
+            </article>
+          </div>
+        </div>
+
+        <!-- ROTINA -->
+        <div class="view" id="view-rotina">
+          <div class="page-heading">
+            <div>
+              <h2>Minha Rotina</h2>
+              <p>Central diária do Orientador Social.</p>
+            </div>
+          </div>
+          <div class="three-col">
+            <article class="panel"><h3><i class="bi bi-calendar-day-fill"></i> Agenda de hoje</h3><div id="routineAgenda" class="list empty-state">Sem compromissos.</div></article>
+            <article class="panel"><h3><i class="bi bi-list-task"></i> Tarefas</h3><div id="routineTasks" class="list empty-state">Sem tarefas pendentes.</div></article>
+            <article class="panel"><h3><i class="bi bi-sticky-fill"></i> Notas recentes</h3><div id="routineNotes" class="list empty-state">Sem notas recentes.</div></article>
+          </div>
+        </div>
+
+        <!-- USUARIOS -->
+        <div class="view" id="view-usuarios">
+          <div class="page-heading">
+            <div>
+              <h2>Usuários</h2>
+              <p>Cadastro básico dos participantes do SCFV.</p>
+            </div>
+          </div>
+
+          <div class="two-col form-layout">
+            <article class="panel">
+              <h3><i class="bi bi-person-plus-fill"></i> Novo usuário</h3>
+              <form id="userForm" class="form-grid">
+                <label>Nome completo<input id="userName" required /></label>
+                <label>Nome social<input id="userSocialName" /></label>
+                <label>Data de nascimento<input id="userBirth" type="date" /></label>
+                <label>Grupo<select id="userGroup"><option value="">Sem grupo</option></select></label>
+                <label>Telefone<input id="userPhone" type="tel" /></label>
+                <label>Responsável<input id="userGuardian" /></label>
+                <label>Necessidade de acessibilidade
+                  <select id="userAccessibility">
+                    <option value="Nenhuma informada">Nenhuma informada</option>
+                    <option>Mobilidade</option>
+                    <option>Visual</option>
+                    <option>Auditiva</option>
+                    <option>Intelectual</option>
+                    <option>Comunicação</option>
+                    <option>Outra</option>
+                  </select>
+                </label>
+                <label>Situação<select id="userStatus"><option>Ativo</option><option>Afastado</option><option>Desligado</option></select></label>
+                <button class="primary-btn full" type="submit">Salvar usuário</button>
+              </form>
+            </article>
+
+            <article class="panel">
+              <div class="panel-head">
+                <h3><i class="bi bi-people-fill"></i> Participantes cadastrados</h3>
+                <input class="mini-search" id="userSearch" placeholder="Buscar nome..." />
+              </div>
+              <div id="usersList" class="list empty-state">Nenhum usuário cadastrado.</div>
+            </article>
+          </div>
+        </div>
+
+        <!-- GRUPOS -->
+        <div class="view" id="view-grupos">
+          <div class="page-heading"><div><h2>Grupos</h2><p>Organização dos grupos de convivência.</p></div></div>
+          <div class="two-col form-layout">
+            <article class="panel">
+              <h3><i class="bi bi-diagram-3-fill"></i> Novo grupo</h3>
+              <form id="groupForm" class="form-grid">
+                <label>Nome do grupo<input id="groupName" required placeholder="Ex.: Adolescentes A" /></label>
+                <label>Faixa etária<input id="groupAge" placeholder="Ex.: 12 a 15 anos" /></label>
+                <label>Dia principal<select id="groupDay"><option>Segunda</option><option>Terça</option><option>Quarta</option><option>Quinta</option><option>Sexta</option><option>Sábado</option></select></label>
+                <label>Horário<input id="groupTime" type="time" /></label>
+                <button class="primary-btn full" type="submit">Salvar grupo</button>
+              </form>
+            </article>
+            <article class="panel"><h3><i class="bi bi-collection-fill"></i> Grupos cadastrados</h3><div id="groupsList" class="list empty-state">Nenhum grupo cadastrado.</div></article>
+          </div>
+        </div>
+
+        <!-- ENCONTROS -->
+        <div class="view" id="view-encontros">
+          <div class="page-heading"><div><h2>Encontros</h2><p>Registro resumido de atividades realizadas.</p></div></div>
+          <div class="two-col form-layout">
+            <article class="panel">
+              <h3><i class="bi bi-chat-heart-fill"></i> Novo encontro</h3>
+              <form id="meetingForm" class="form-grid">
+                <label>Grupo<select id="meetingGroup" required></select></label>
+                <label>Data<input id="meetingDate" type="date" required /></label>
+                <label>Horário<input id="meetingTime" type="time" /></label>
+                <label>Tema<input id="meetingTheme" required /></label>
+                <label class="full">Objetivo socioeducativo<textarea id="meetingGoal"></textarea></label>
+                <label class="full">Relato do encontro<textarea id="meetingReport"></textarea></label>
+                <button class="primary-btn full" type="submit">Salvar encontro</button>
+              </form>
+            </article>
+            <article class="panel"><h3><i class="bi bi-clock-history"></i> Histórico de encontros</h3><div id="meetingsList" class="list empty-state">Nenhum encontro registrado.</div></article>
+          </div>
+        </div>
+
+        <!-- FREQUENCIA -->
+        <div class="view" id="view-frequencia">
+          <div class="page-heading"><div><h2>Frequência</h2><p>Registro rápido de presença por usuário.</p></div></div>
+          <article class="panel">
+            <div class="form-grid compact">
+              <label>Usuário<select id="attendanceUser"></select></label>
+              <label>Data<input id="attendanceDate" type="date" /></label>
+              <label>Situação<select id="attendanceStatus"><option>Presente</option><option>Falta</option><option>Falta justificada</option><option>Participação parcial</option></select></label>
+              <button id="attendanceSave" class="primary-btn align-end">Registrar</button>
+            </div>
+            <div id="attendanceList" class="list empty-state">Nenhum registro de frequência.</div>
+          </article>
+        </div>
+
+        <!-- VINCULOS -->
+        <div class="view" id="view-vinculos">
+          <div class="page-heading"><div><h2>Vínculos</h2><p>Observações socioeducativas sem diagnóstico ou classificação de vulnerabilidade.</p></div></div>
+          <div class="two-col form-layout">
+            <article class="panel">
+              <h3><i class="bi bi-stars"></i> Nova observação</h3>
+              <form id="bondForm" class="form-grid">
+                <label>Usuário<select id="bondUser" required></select></label>
+                <label>Dimensão
+                  <select id="bondDimension">
+                    <option>Participação</option>
+                    <option>Convivência</option>
+                    <option>Pertencimento</option>
+                    <option>Autonomia</option>
+                    <option>Protagonismo</option>
+                    <option>Território e redes</option>
+                  </select>
+                </label>
+                <label>Tipo
+                  <select id="bondType">
+                    <option>Potencialidade observada</option>
+                    <option>Sinal de atenção</option>
+                    <option>Situação recorrente</option>
+                    <option>Discussão com equipe de referência</option>
+                  </select>
+                </label>
+                <label>Data<input id="bondDate" type="date" /></label>
+                <label class="full">Descrição objetiva<textarea id="bondText" required placeholder="Descreva fatos observados, sem diagnóstico."></textarea></label>
+                <button class="primary-btn full" type="submit">Salvar observação</button>
+              </form>
+            </article>
+            <article class="panel"><h3><i class="bi bi-card-text"></i> Observações registradas</h3><div id="bondsList" class="list empty-state">Nenhuma observação registrada.</div></article>
+          </div>
+          <article class="panel recommendation-panel">
+            <div class="panel-head">
+              <div><h3><i class="bi bi-lightbulb-fill"></i> Intervenções socioeducativas sugeridas</h3><p>Relacionadas à dimensão selecionada. A escolha final é do Orientador e da equipe.</p></div>
+            </div>
+            <div id="bondRecommendations" class="recommendation-grid"></div>
+          </article>
+        </div>
+
+        <!-- OFICINAS -->
+        <div class="view" id="view-oficinas">
+          <div class="page-heading"><div><h2>Oficinas</h2><p>Banco inicial de atividades socioeducativas.</p></div></div>
+          <div class="workshop-grid" id="workshopGrid"></div>
+        </div>
+
+        <!-- AGENDA -->
+        <div class="view" id="view-agenda">
+          <div class="page-heading"><div><h2>Agenda</h2><p>Compromissos, oficinas, reuniões e eventos.</p></div></div>
+          <div class="two-col form-layout">
+            <article class="panel">
+              <h3><i class="bi bi-calendar2-plus-fill"></i> Novo compromisso</h3>
+              <form id="agendaForm" class="form-grid">
+                <label>Título<input id="agendaTitle" required /></label>
+                <label>Data<input id="agendaDate" type="date" required /></label>
+                <label>Horário<input id="agendaTime" type="time" /></label>
+                <label>Tipo<select id="agendaType"><option>SCFV</option><option>Oficina</option><option>Reunião</option><option>Evento</option><option>Relatório</option><option>Tarefa</option></select></label>
+                <label class="full">Descrição<textarea id="agendaDescription"></textarea></label>
+                <button class="primary-btn full" type="submit">Salvar compromisso</button>
+              </form>
+            </article>
+            <article class="panel">
+              <div class="calendar-toolbar">
+                <button class="icon-btn" id="calendarPrev" title="Mês anterior"><i class="bi bi-chevron-left"></i></button>
+                <h3 id="calendarTitle"><i class="bi bi-calendar3"></i> Calendário</h3>
+                <button class="icon-btn" id="calendarNext" title="Próximo mês"><i class="bi bi-chevron-right"></i></button>
+              </div>
+              <div id="calendar" class="calendar"></div>
+              <h3 class="mt"><i class="bi bi-arrow-right-circle-fill"></i> Próximos compromissos</h3>
+              <div id="agendaList" class="list empty-state">Nenhum compromisso agendado.</div>
+            </article>
+          </div>
+        </div>
+
+        <!-- NOTAS -->
+        <div class="view" id="view-notas">
+          <div class="page-heading"><div><h2>Bloco de Notas</h2><p>Anotações rápidas com data e hora automática.</p></div></div>
+          <div class="two-col form-layout">
+            <article class="panel">
+              <h3><i class="bi bi-pencil-square"></i> Nova nota</h3>
+              <form id="noteForm" class="form-grid">
+                <label>Título<input id="noteTitle" placeholder="Opcional" /></label>
+                <label>Tipo<select id="noteType"><option>Nota pessoal de trabalho</option><option>Nota relacionada ao serviço</option></select></label>
+                <label class="full">Anotação<textarea id="noteText" required></textarea></label>
+                <button class="primary-btn full" type="submit">Salvar nota</button>
+              </form>
+            </article>
+            <article class="panel"><h3><i class="bi bi-journal-richtext"></i> Notas salvas</h3><div id="notesList" class="list empty-state">Nenhuma nota salva.</div></article>
+          </div>
+        </div>
+
+        <!-- TAREFAS -->
+        <div class="view" id="view-tarefas">
+          <div class="page-heading"><div><h2>Tarefas</h2><p>Organização das pendências do Orientador.</p></div></div>
+          <div class="two-col form-layout">
+            <article class="panel">
+              <h3><i class="bi bi-list-task"></i> Nova tarefa</h3>
+              <form id="taskForm" class="form-grid">
+                <label>Tarefa<input id="taskTitle" required /></label>
+                <label>Prazo<input id="taskDate" type="date" /></label>
+                <label>Prioridade<select id="taskPriority"><option>Normal</option><option>Importante</option><option>Urgente</option></select></label>
+                <button class="primary-btn full" type="submit">Salvar tarefa</button>
+              </form>
+            </article>
+            <article class="panel"><h3><i class="bi bi-card-checklist"></i> Lista de tarefas</h3><div id="tasksList" class="list empty-state">Nenhuma tarefa cadastrada.</div></article>
+          </div>
+        </div>
+
+        <!-- RELATORIOS -->
+        <div class="view" id="view-relatorios">
+          <div class="page-heading"><div><h2>Relatórios</h2><p>Resumo operacional dos dados registrados nesta versão.</p></div></div>
+          <div class="cards-grid">
+            <article class="panel report-card"><span>Usuários</span><strong id="reportUsers">0</strong></article>
+            <article class="panel report-card"><span>Grupos</span><strong id="reportGroups">0</strong></article>
+            <article class="panel report-card"><span>Encontros</span><strong id="reportMeetings">0</strong></article>
+            <article class="panel report-card"><span>Observações</span><strong id="reportBonds">0</strong></article>
+            <article class="panel report-card"><span>Presenças registradas</span><strong id="reportAttendance">0</strong></article>
+            <article class="panel report-card"><span><i class="bi bi-tools"></i> Oficinas disponíveis</span><strong>8</strong></article>
+          </div>
+          <article class="panel">
+            <h3><i class="bi bi-file-earmark-text-fill"></i> Resumo textual</h3>
+            <div id="reportSummary"></div>
+            <div class="report-actions mt">
+              <button class="primary-btn" onclick="window.print()"><i class="bi bi-printer-fill"></i> Imprimir / Salvar em PDF</button>
+              <button class="ghost-btn" id="exportBackupBtn"><i class="bi bi-download"></i> Exportar backup</button>
+              <button class="ghost-btn" id="importBackupBtn"><i class="bi bi-upload"></i> Importar backup</button>
+              <input id="backupFileInput" type="file" accept="application/json,.json" hidden />
+            </div>
+          </article>
+        </div>
+
+        <!-- BIBLIOTECA -->
+        <div class="view" id="view-biblioteca">
+          <div class="page-heading"><div><h2>Biblioteca</h2><p>Materiais e referências internas da BASE Sintropia.</p></div></div>
+          <div class="cards-grid">
+            <article class="panel resource-card"><h3><i class="bi bi-compass-fill"></i> Método O.R.I.E.N.T.A.</h3><p>Observar → Registrar → Identificar → Escolher → Nutrir → Traçar → Articular.</p></article>
+            <article class="panel resource-card"><h3><i class="bi bi-bar-chart-steps"></i> Dimensões</h3><p>Participação, convivência, pertencimento, autonomia, protagonismo, território e redes.</p></article>
+            <article class="panel resource-card"><h3><i class="bi bi-shield-check"></i> Regra de registro</h3><p>Descrever fatos observados. Não realizar diagnóstico clínico, psicológico ou classificação de vulnerabilidade.</p></article>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div class="modal hidden" id="workshopModal">
+    <div class="modal-card workshop-modal-card">
+      <button class="modal-close" onclick="closeWorkshop()">×</button>
+      <div id="workshopContent"></div>
+    </div>
+  </div>
+
+  <div class="modal hidden" id="userModal">
+    <div class="modal-card user-modal-card">
+      <button class="modal-close" onclick="closeUserProfile()">×</button>
+      <div id="userProfileContent"></div>
+    </div>
+  </div>
+
+  <div class="modal hidden" id="quickModal">
+    <div class="modal-card">
+      <button class="modal-close" onclick="closeQuickAction()">×</button>
+      <h3><i class="bi bi-lightning-charge-fill"></i> Ação rápida</h3>
+      <div class="quick-grid modal-grid">
+        <button onclick="closeQuickAction();showView('usuarios')"><i class="bi bi-person-plus-fill"></i> Novo usuário</button>
+        <button onclick="closeQuickAction();showView('agenda')"><i class="bi bi-calendar2-plus-fill"></i> Novo compromisso</button>
+        <button onclick="closeQuickAction();showView('notas')"><i class="bi bi-pencil-square"></i> Nova nota</button>
+        <button onclick="closeQuickAction();showView('tarefas')"><i class="bi bi-list-task"></i> Nova tarefa</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+  <script src="script.js"></script>
+</body>
+</html>
