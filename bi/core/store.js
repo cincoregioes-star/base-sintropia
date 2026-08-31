@@ -1,7 +1,7 @@
 (() => {
   'use strict';
 
-  const cfg = window.SintropiaConfig || { data: { namespace: 'base-sintropia-bi', schemaVersion: 5 } };
+  const cfg = window.SintropiaConfig || { data: { namespace: 'base-sintropia-bi', schemaVersion: 6 } };
   const ns = cfg.data.namespace;
 
   const KEYS = Object.freeze({
@@ -14,7 +14,9 @@
     workshops: `${ns}:workshops:v1`,
     referrals: `${ns}:referrals:v1`,
     tasks: `${ns}:tasks:v1`,
-    decisions: `${ns}:decisions:v1`
+    decisions: `${ns}:decisions:v2`,
+    decisionEvents: `${ns}:decision-events:v1`,
+    alertRules: `${ns}:alert-rules:v1`
   });
 
   function clone(value) {
@@ -77,7 +79,7 @@
 
   function bootstrap() {
     const current = parse(KEYS.meta, null);
-    const expectedVersion = cfg.data.schemaVersion || 5;
+    const expectedVersion = cfg.data.schemaVersion || 6;
     if (!current || current.schemaVersion !== expectedVersion) {
       save(KEYS.meta, {
         schemaVersion: expectedVersion,
