@@ -17,13 +17,13 @@
       'participant.read.unit', 'participant.update.unit', 'group.read.unit', 'group.manage.unit',
       'attendance.read.unit', 'workshop.read', 'workshop.manage.unit', 'referral.read.unit',
       'referral.update.unit', 'dashboard.read.unit', 'dashboard.create.unit',
-      'report.generate.unit', 'risk.read.unit', 'decision.manage.unit', 'dataquality.read.unit', 'sinti.use'
+      'report.generate.unit', 'risk.read.unit', 'decision.manage.unit', 'dataquality.read.unit', 'rule.manage.unit', 'sinti.use'
     ],
     gestor: [
       'participant.read.aggregate', 'group.read.organization', 'attendance.read.organization',
       'workshop.read.organization', 'referral.read.organization', 'dashboard.read.organization',
       'dashboard.create.organization', 'report.generate.organization', 'risk.read.organization',
-      'decision.manage.organization', 'dataquality.read.organization', 'sinti.use'
+      'decision.manage.organization', 'dataquality.read.organization', 'rule.manage.organization', 'sinti.use'
     ],
     auditor: [
       'audit.read.organization', 'dataquality.read.organization', 'risk.read.organization',
