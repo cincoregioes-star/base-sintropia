@@ -1,6 +1,6 @@
 window.SintropiaConfig = Object.freeze({
   appName: 'BASE Sintropia BI',
-  version: '0.2.0-foundation',
+  version: '0.3.0-crud',
   mode: 'demo-local',
   supabase: {
     enabled: false,
@@ -15,6 +15,6 @@ window.SintropiaConfig = Object.freeze({
   },
   data: {
     namespace: 'base-sintropia-bi',
-    schemaVersion: 2
+    schemaVersion: 3
   }
 });
